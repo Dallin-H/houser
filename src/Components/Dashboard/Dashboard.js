@@ -9,18 +9,36 @@ class Dashboard extends Component {
     this.state = {
       houses: []
     };
+    this.handleChangeDeleteHouse = this.handleChangeDeleteHouse.bind (this)
   }
   //methods
   componentDidMount() {
-    axios.get('http://localhost:4000/api/houses')
-    .then(response => {
-      this.setState({ houses: response.data })
-    })
+    axios.get("http://localhost:4000/api/houses").then(response => {
+      this.setState({ houses: response.data });
+    });
   }
+
+  handleChangeDeleteHouse(id) {
+    axios.delete(`http://localhost:4000/api/houses/${id}`)
+    
+  }
+
   render() {
     const mappedHouses = this.state.houses.map(eachHouseListing => {
-      return <House key={eachHouseListing.index} house={eachHouseListing} />;
+      return (
+        <House
+          key={eachHouseListing.id}
+          name={eachHouseListing.name}
+          address={eachHouseListing.address}
+          city={eachHouseListing.city}
+          state={eachHouseListing.state}
+          zipcode={eachHouseListing.zipcode}
+          delete={this.handleChangeDeleteHouse}
+          id={eachHouseListing.id}
+        />
+      );
     });
+
     return (
       <div className="Dashboard__container">
         <div className="Dashboard__topcontainer">

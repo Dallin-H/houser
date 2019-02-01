@@ -1,16 +1,18 @@
 import React from "react";
 
-const House = () => {
+const House = (props) => {
   return (
     <div className="House__container">
       <div className="House__form">
-        <p>Property Name:</p>
-        <p>Address:</p>
-        <p>City:</p>
-        <p>State:</p>
-        <p>Zip:</p>
+        <p>Property Name: {props.name}</p>
+        <p>Address: {props.address}</p>
+        <p>City: {props.city}</p>
+        <p>State: {props.state}</p>
+        <p>Zipcode: {props.zipcode}</p>
       </div>
-      <button>Delete</button>
+      <button
+      onClick={() => props.delete(props.id)}
+      >Delete</button>
     </div>
   );
 };

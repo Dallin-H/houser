@@ -14,8 +14,9 @@ massive(process.env.CONNECTION_STRING).then((dbInstance) => {
 
 //endpoints:
 const baseurl = '/api/houses';
-app.get( `${baseurl}`, ctrl.getHouses )
-
+app.get( baseurl, ctrl.getHouses )
+app.post( baseurl, ctrl.addHouse )
+app.delete( `${baseurl}/:id`, ctrl.deleteHouse )
 
 
 

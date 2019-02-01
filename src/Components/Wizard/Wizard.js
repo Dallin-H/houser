@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from 'react-router-dom';
+import axios from "axios";
 
 class Wizard extends Component {
   constructor() {
@@ -15,6 +16,18 @@ class Wizard extends Component {
   //methods
 handleChange(field, value) {
   this.setState({ [`${field}`]: value });
+}
+handleButtonComplete() {
+  const houseObj = {
+    name: this.state.name,
+    address: this.state.address,
+    city: this.state.city,
+    state: this.state.state,
+    zipcode: this.state.zipcode
+  }
+  axios.post(`http://localhost:4000/api/houses`, houseObj)
+  .then(console.log(`house added: ${houseObj}`))
+
 }
 
   render() {
@@ -36,7 +49,9 @@ handleChange(field, value) {
           Zipcode : <input onChange={ (e) => this.handleChange( 'zipcode', e.target.value )}/>
         </div>
         <div className="Wizard__bottomcontainer">
-          <button>Complete</button>
+          <Link to='/'><button
+          onClick={ () => this.handleButtonComplete()}
+          >Complete</button></Link>
         </div>
       </div>
     );
