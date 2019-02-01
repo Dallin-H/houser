@@ -17,6 +17,11 @@ class Dashboard extends Component {
       this.setState({ houses: response.data });
     });
   }
+  componentDidUpdate() {
+    axios.get("http://localhost:4000/api/houses").then(response => {
+      this.setState({ houses: response.data });
+    });   
+  }
 
   handleChangeDeleteHouse(id) {
     axios.delete(`http://localhost:4000/api/houses/${id}`)
