@@ -11,8 +11,9 @@ const House = (props) => {
         <p>Zipcode: {props.zipcode}</p>
       </div>
       <button
+      className='House__deleteButton'
       onClick={() => props.delete(props.id)}
-      >Delete</button>
+      >X</button>
     </div>
   );
 };
